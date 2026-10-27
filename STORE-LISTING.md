@@ -2,7 +2,7 @@
 
 Copy-paste these into the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole) (one-time $5 registration fee).
 
-**Package to upload:** `pasteguard-extension.zip` from the [latest release](https://github.com/aayushm1/pasteguard/releases/latest).
+**Package to upload:** `dist/pasteguard-webstore.zip` (manifest at the zip root; rebuild it with `cd extension && zip -r ../dist/pasteguard-webstore.zip . -x '*.DS_Store'`). Step-by-step: [LAUNCH-GUIDE.md](LAUNCH-GUIDE.md).
 
 ---
 
@@ -11,7 +11,7 @@ Copy-paste these into the [Chrome Web Store Developer Dashboard](https://chrome.
 **Name:** PasteGuard: mask sensitive data before AI sees it
 
 **Summary (132 chars max):**
-Masks emails, phones, card numbers, API keys and client names when you paste into ChatGPT, Claude or Gemini. 100% local.
+Masks names, emails, card details, IDs, addresses and API keys when you paste into ChatGPT, Claude or Gemini. 100% local.
 
 **Category:** Productivity (alternative: Privacy & Security)
 
@@ -27,11 +27,12 @@ HOW IT WORKS
 • When the AI replies using those placeholders, PasteGuard shows the real values on your screen only.
 
 WHAT IT CATCHES
-• Emails and phone numbers
-• Card numbers (Luhn-checked), IBANs, Aadhaar, PAN, US SSNs
-• API keys (OpenAI, Anthropic, AWS, GitHub, Slack, Google, Stripe), JWTs, private keys
-• IP addresses
-• Your own "always mask" terms: client names, people, project code names
+• Names, company names, street addresses and project codenames, understood from context
+• Emails, phone numbers and IP addresses
+• Card numbers (Luhn-checked), CVV, expiry, IBANs, UPI IDs, IFSC
+• Aadhaar, PAN, GSTIN, US SSNs, dates of birth, client/patient/policy ID numbers
+• API keys (OpenAI, Anthropic, Stripe, AWS, GitHub, Slack, Google and more), passwords, tokens, private keys
+• Your own "always mask" terms
 
 PRIVATE BY DESIGN
 • No servers: nothing you paste is ever sent anywhere
@@ -70,5 +71,5 @@ Certify: does not sell data; does not use or transfer data for unrelated purpose
 ## Assets checklist
 
 - [x] Icon 128×128: `extension/icons/icon128.png`
-- [ ] Screenshots, 1280×800 (at least 1): toast on ChatGPT, restored reply, popup
-- [ ] Small promo tile, 440×280 (optional)
+- [x] Screenshots, 1280×800: `store-assets/screenshot-1.png`, `-2.png`, `-3.png`
+- [x] Small promo tile, 440×280: `store-assets/promo-tile-440x280.png`
