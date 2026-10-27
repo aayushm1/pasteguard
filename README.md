@@ -82,7 +82,7 @@ Checksums and context keep false alarms low: order numbers, invoice numbers, dat
 
 ## Install
 
-**Chrome Web Store:** coming soon.
+**Chrome Web Store:** submitted, in review. One-click install is coming soon.
 
 **Manual install (Chrome, Edge, Brave, Arc):**
 1. Download [`pasteguard-extension.zip`](https://github.com/aayushm1/pasteguard/releases/latest/download/pasteguard-extension.zip) and unzip it.
@@ -123,7 +123,7 @@ STORE-LISTING.md   Chrome Web Store submission copy
 | **Business model** | Free for individuals → Pro ($5/mo: typed text, file uploads, any site) → Team ($6/user/mo: shared rules, admin dashboard, audit log) |
 
 ### Roadmap
-- [ ] Chrome Web Store listing
+- [x] Chrome Web Store listing submitted (in review)
 - [ ] Mask typed text before send, not just pastes
 - [ ] Scan file uploads (PDF, DOCX, CSV) before they reach the AI
 - [ ] Per-site enable/disable
