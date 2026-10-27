@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>PasteGuard dev harness</title>
+<style>
+  body{font:15px/1.5 system-ui,sans-serif;max-width:760px;margin:30px auto;padding:0 20px}
+  .msg{background:#f4f6fa;border-radius:12px;padding:12px 14px;margin:10px 0;white-space:pre-wrap}
+  textarea,[contenteditable]{display:block;width:100%;min-height:70px;border:1px solid #ccd;border-radius:10px;padding:10px;font:inherit;margin:8px 0}
+</style>
+<script>
+// Minimal chrome.* shim so content.js runs outside the extension
+(function () {
+  const mk = () => { const d = {}; const l = []; return {
+    _d: d, _l: l,
+    async get(k) { if (!k) return { ...d }; const ks = Array.isArray(k) ? k : [k]; return Object.fromEntries(ks.filter(x => x in d).map(x => [x, d[x]])); },
+    async set(o) { const ch = {}; for (const x in o) { ch[x] = { oldValue: d[x], newValue: JSON.parse(JSON.stringify(o[x])) }; d[x] = JSON.parse(JSON.stringify(o[x])); } },
+    async remove(k) { delete d[k]; }
+  }; };
+  const local = mk(), session = mk();
+  local._d.customTerms = 'Northwind => CLIENT';
+  window.chrome = { storage: { local, session, onChanged: { addListener() {} } }, runtime: { sendMessage: async m => { window.__badge = m.count; } } };
+})();
+</script>
+</head>
+<body>
+<h2>PasteGuard dev harness</h2>
+<p>Paste into either box. The textarea mimics Perplexity; the contenteditable mimics ChatGPT/Claude.</p>
+<textarea id="ta" placeholder="Textarea input"></textarea>
+<div id="ce" contenteditable="true" data-placeholder="Contenteditable input"></div>
+<button id="reply">Simulate streaming AI reply</button>
+<div id="thread"></div>
+<script src="../extension/detectors.js"></script>
+<script src="../extension/content.js"></script>
+<script>
+document.getElementById('reply').onclick = () => {
+  const m = document.createElement('div'); m.className = 'msg'; document.getElementById('thread').appendChild(m);
+  const txt = 'Sure! I will email [EMAIL_1] and call [PHONE_1] about [CLIENT_1]. Unknown [FOO_3] stays as-is.';
+  let i = 0; const t = setInterval(() => { i += 6; m.textContent = txt.slice(0, i); if (i >= txt.length) clearInterval(t); }, 30);
+};
+</script>
+</body>
+</html>

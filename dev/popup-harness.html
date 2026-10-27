@@ -1,0 +1,21 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>PasteGuard popup preview</title>
+<script>
+// Renders extension/popup.html with a chrome.* shim and sample data.
+const SHIM = `<script>
+(function(){
+  const mk = d => ({ async get(k){ if(!k) return {...d}; const ks=Array.isArray(k)?k:[k]; return Object.fromEntries(ks.filter(x=>x in d).map(x=>[x,d[x]])); }, async set(o){ Object.assign(d,o); }, async remove(k){ delete d[k]; } });
+  const today = new Date().toISOString().slice(0,10);
+  window.chrome = { storage: {
+    local: mk({ enabled:true, restore:true, disabled:['IP'], customTerms:'Northwind => CLIENT\\nPriya Shah => PERSON',
+      stats:{ total:47, byType:{EMAIL:21,PHONE:11,CLIENT:9,API_KEY:4,CARD:2}, byDay:{[today]:18} } }),
+    session: mk({ vault:{ byPh:{ '[EMAIL_1]':{value:'priya.shah@northwind.com'}, '[PHONE_1]':{value:'+91 98765 43210'}, '[CLIENT_1]':{value:'Northwind'}, '[API_KEY_1]':{value:'AKIAIOSFODNN7EXAMPLE'} } } })
+  } };
+})();
+<\/script>`;
+fetch('../extension/popup.html').then(r => r.text()).then(html => {
+  html = html.replace(/(src|href)="(?!https?:)([^"]+)"/g, '$1="../extension/$2"').replace('<head>', '<head>' + SHIM);
+  document.open(); document.write(html); document.close();
+});
+</script>
