@@ -11,37 +11,36 @@ Copy-paste these into the [Chrome Web Store Developer Dashboard](https://chrome.
 **Name:** PasteGuard: mask sensitive data before AI sees it
 
 **Summary (132 chars max):**
-Masks names, emails, card details, IDs, addresses and API keys when you paste into ChatGPT, Claude or Gemini. 100% local.
+Masks names, emails, card details, ID numbers, addresses and API keys before you paste them into AI chat tools. 100% local.
 
-**Category:** Productivity (alternative: Privacy & Security)
+**Category:** Privacy & Security (alternative: Productivity)
+
+> ⚠️ Don't list product or brand names (AI tools, API providers) in the description. A bare list was rejected as **keyword spam** (violation "Yellow Argon"). One natural mention in a sentence is fine.
 
 **Description:**
 
 Paste into AI. Keep the secrets.
 
-PasteGuard masks sensitive data the moment you paste into ChatGPT, Claude, Gemini and other AI chat tools, then shows you the real values in the AI's reply.
+PasteGuard masks sensitive data the moment you paste it into an AI chat assistant such as ChatGPT, then shows you the real values when the AI replies.
 
 HOW IT WORKS
 • You paste as usual. PasteGuard checks the text before the chat box receives it.
-• Emails, phone numbers, card numbers, API keys and your own client names become placeholders like [EMAIL_1] and [CLIENT_1].
-• When the AI replies using those placeholders, PasteGuard shows the real values on your screen only.
+• Sensitive details become placeholders like [EMAIL_1] or [CLIENT_1], so the AI never sees the originals.
+• When the reply mentions a placeholder, PasteGuard shows the real value on your screen only.
 
-WHAT IT CATCHES
-• Names, company names, street addresses and project codenames, understood from context
-• Emails, phone numbers and IP addresses
-• Card numbers (Luhn-checked), CVV, expiry, IBANs, UPI IDs, IFSC
-• Aadhaar, PAN, GSTIN, US SSNs, dates of birth, client/patient/policy ID numbers
-• API keys (OpenAI, Anthropic, Stripe, AWS, GitHub, Slack, Google and more), passwords, tokens, private keys
-• Your own "always mask" terms
+WHAT IT PROTECTS
+• People's names, company names, street addresses and project codenames, recognised from context
+• Email addresses, phone numbers and IP addresses
+• Payment details: card numbers, CVV, expiry dates and bank account identifiers
+• Government ID numbers and dates of birth
+• Passwords, access tokens, private keys and API keys
+• Any words you add to your own "always mask" list
 
 PRIVATE BY DESIGN
-• No servers: nothing you paste is ever sent anywhere
-• The placeholder map lives in memory and is wiped when you close the browser
-• One permission (storage), and it only runs on AI chat sites
-• Open source: https://github.com/aayushm1/pasteguard
-
-WORKS ON
-ChatGPT, Claude, Gemini, Microsoft Copilot, Perplexity, DeepSeek, Mistral Le Chat, Poe.
+• Everything runs locally in your browser. Nothing you paste is sent to any server.
+• The placeholder map is kept in memory and cleared when you close the browser.
+• It needs one permission (storage) and only runs on supported AI chat sites.
+• The code is open source on GitHub.
 
 **Website:** https://aayushm1.github.io/pasteguard/
 **Support:** https://github.com/aayushm1/pasteguard/issues
