@@ -129,7 +129,7 @@ footer a{color:var(--teal2)}
 <section id="try"><div class="wrap">
   <div class="sh"><span class="eyebrow">Live demo</span><h2>See exactly what the AI gets</h2><p>Edit the text on the left. This page runs the same detection engine as the extension, right in your browser.</p></div>
   <div class="play">
-    <div class="play-top"><label for="terms">Always mask:</label><input id="terms" value="Northwind => CLIENT, Priya Shah => PERSON" spellcheck="false"></div>
+    <div class="play-top"><label for="terms">Always mask:</label><input id="terms" value="" placeholder="Optional, e.g. Acme Corp => CLIENT, Jane Doe => PERSON" spellcheck="false"></div>
     <div class="panes">
       <div class="pane"><div class="pane-h"><span>📋 What you paste</span><span class="dotrow"><i></i><i></i><i></i></span></div><textarea id="input" spellcheck="false"></textarea></div>
       <div class="arrow">➜</div>
@@ -157,7 +157,7 @@ footer a{color:var(--teal2)}
 </div></section>
 
 <section style="padding-top:20px"><div class="wrap">
-  <div class="sh"><span class="eyebrow">What it catches</span><h2>Built-in detectors, checked properly</h2><p>Card numbers are Luhn-checked, Aadhaar numbers Verhoeff-checked and IBANs checksum-validated, so order numbers and dates aren't flagged by mistake.</p></div>
+  <div class="sh"><span class="eyebrow">What it catches</span><h2>Understands context, not just patterns</h2><p>Card numbers are Luhn-checked and IBANs and Aadhaar numbers checksum-validated. Context rules catch what patterns can't: <em>“CVV 123”</em>, <em>“client ID HLX-00482”</em>, <em>“finance officer Rohan Deshmukh”</em>. Once a name or company is found, every later mention is masked too. Order numbers, dates and version numbers are left alone.</p></div>
   <div class="dets" id="detGrid"></div>
 </div></section>
 
@@ -202,7 +202,7 @@ footer a{color:var(--teal2)}
   <div class="sh"><span class="eyebrow">Pricing</span><h2>Free for individuals. Always.</h2></div>
   <div class="price">
     <div class="tier hot"><b style="color:var(--teal2)">Free</b><div class="amt">$0</div><span style="color:var(--muted);font-size:14px">Everything you need on your own</span>
-      <ul><li>All built-in detectors</li><li>Custom "always mask" terms</li><li>Real values restored in replies</li><li>9 AI chat sites</li></ul><a class="btn" href="#install">Install free</a></div>
+      <ul><li>25 built-in detectors with context awareness</li><li>Custom "always mask" terms</li><li>Real values restored in replies</li><li>9 AI chat sites</li></ul><a class="btn" href="#install">Install free</a></div>
     <div class="tier"><b style="color:var(--ink)">Pro <span class="soon">Coming soon</span></b><div class="amt">$5<small>/month</small></div><span style="color:var(--muted);font-size:14px">For consultants, lawyers, recruiters</span>
       <ul><li>Mask typed text, not just pastes</li><li>File uploads (PDF, DOCX) scanned before upload</li><li>Saved term lists per client</li><li>Any website, not just AI chats</li></ul><a class="btn ghost" href="https://github.com/aayushm1/pasteguard" target="_blank" rel="noopener">⭐ Star on GitHub to follow</a></div>
     <div class="tier"><b style="color:var(--ink)">Team <span class="soon">Coming soon</span></b><div class="amt">$6<small>/user/month</small></div><span style="color:var(--muted);font-size:14px">For companies adopting AI safely</span>
@@ -214,25 +214,25 @@ footer a{color:var(--teal2)}
   <div class="sh"><span class="eyebrow">FAQ</span><h2>Questions</h2></div>
   <details><summary>Does PasteGuard send my data anywhere?</summary><p>No. There's no server. The extension has no network permissions beyond the AI sites it runs on, and it makes no requests of its own.</p></details>
   <details><summary>What if I actually want to paste something unmasked?</summary><p>Click “Allow next paste unmasked” in the notification and paste again, or switch PasteGuard off from the toolbar icon.</p></details>
-  <details><summary>Does it catch names?</summary><p>Names are too varied to detect reliably without sending text to a model. Add the names that matter (clients, people, projects) to “Always mask” and they're caught every time.</p></details>
+  <details><summary>Does it catch names?</summary><p>Yes, from context: titles (“Dr. Ananya Rao”), roles (“finance officer Rohan Deshmukh”), labels (“Name: …”), greetings, common first names, and names implied by email addresses. Company names are caught from suffixes (“Inc”, “Labs”, “Biosciences”) and email domains. Once found, every later mention is masked. For anything unusual, add it to “Always mask”.</p></details>
   <details><summary>Does it mask text I type?</summary><p>Version 0.1 masks pastes, which is where bulk sensitive data comes from (emails, tickets, spreadsheets). Typed-text scanning is planned.</p></details>
   <details><summary>Is it a replacement for my company's security tools?</summary><p>No. It's a seatbelt for everyday use. It catches common sensitive values but can't guarantee it catches everything.</p></details>
 </div></section>
 
-<footer><div class="wrap"><span>PasteGuard v0.1 · MIT licensed · Built by <a href="https://aayushm1.github.io/" target="_blank" rel="noopener">Aayush Mehan</a></span><span><a href="https://github.com/aayushm1/pasteguard" target="_blank" rel="noopener">GitHub</a> · <a href="https://github.com/aayushm1/pasteguard/blob/main/PRIVACY.md" target="_blank" rel="noopener">Privacy policy</a></span></div></footer>
+<footer><div class="wrap"><span>PasteGuard v0.2 · MIT licensed · Built by <a href="https://aayushm1.github.io/" target="_blank" rel="noopener">Aayush Mehan</a></span><span><a href="https://github.com/aayushm1/pasteguard" target="_blank" rel="noopener">GitHub</a> · <a href="https://github.com/aayushm1/pasteguard/blob/main/PRIVACY.md" target="_blank" rel="noopener">Privacy policy</a></span></div></footer>
 
 <script src="extension/detectors.js"></script>
 <script>
 const P = PasteGuard;
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const SAMPLE = `Hi team, forwarding the escalation from Northwind.
+const SAMPLE = `Helix Biosciences Inc. wants access to our analysis platform.
 
-Priya Shah (priya.shah@northwind.com, +91 98765 43210) says their card 4111 1111 1111 1111 was charged twice for invoice INV-2291.
+The billing contact is finance officer Rohan Deshmukh (rohan.deshmukh@helixbio.com, +1 617 555 0142). He paid with card 4111 1111 1111 1111, expiry 12/29, CVV 123, billed to 21 Research Park Road, Cambridge, MA 02139.
 
-Their admin key sk-proj-9fK2mQx81LzT4vB7nW3cR5yH is in the ticket too.
+Helix was issued client ID HLX-00482 and the API key sk_test_FAKE_9fA3xQ72LmPz48TcVb01 for Project Aurora.
 
-Can you draft a reply apologising and confirming a refund by Friday?`;
+Can you draft a short welcome email to Rohan?`;
 $('input').value = SAMPLE;
 
 let vault, items = [];
@@ -255,16 +255,21 @@ run();
 
 // Simulated AI reply written only with placeholders the AI actually received
 function aiReply() {
-  const ph = t => Object.keys(vault.byPh).find(p => vault.byPh[p].type === t);
-  const person = ph('PERSON'), email = ph('EMAIL'), phone = ph('PHONE'), card = ph('CARD'), key = ph('API_KEY'), client = ph('CLIENT');
-  const lines = [];
-  lines.push(`Subject: Duplicate charge on INV-2291: refund confirmed`, '');
-  lines.push(`Hi ${person || 'there'},`, '');
-  lines.push(`Thank you for flagging this, and I'm sorry for the trouble.${card ? ` We've confirmed that the card ${card} was charged twice for invoice INV-2291.` : ''} A full refund of the duplicate charge will be processed by Friday.`, '');
-  if (key) lines.push(`As a precaution, please rotate the admin key ${key}, since it was shared in the ticket.`, '');
-  if (email || phone) lines.push(`We'll send confirmation to ${email || 'your email'}${phone ? `, and you can reach us anytime or we'll call you at ${phone}` : ''}.`, '');
-  lines.push(`Best regards,`, `Support Team${client ? ` for ${client}` : ''}`);
-  return lines.join('\n');
+  const all = t => Object.keys(vault.byPh).filter(p => vault.byPh[p].type === t);
+  const ph = t => all(t)[0];
+  const people = all('PERSON');
+  const person = people.find(p => !/\s/.test(vault.byPh[p].value.trim())) || people[0];
+  const org = ph('ORG') || ph('CLIENT'), email = ph('EMAIL'), phone = ph('PHONE'), card = ph('CARD'), exp = ph('EXPIRY');
+  const key = ph('API_KEY') || ph('SECRET'), id = ph('ID'), project = ph('PROJECT'), addr = ph('ADDRESS');
+  const L = [];
+  L.push(`Subject: Welcome aboard${org ? ', ' + org : ''}!`, '');
+  L.push(`Hi ${person || 'there'},`, '');
+  L.push(`Thanks for choosing us. Your access is now live${project ? ` for ${project}` : ''}${id ? ` under client ID ${id}` : ''}.`, '');
+  if (card) L.push(`Billing is set up on the card ${card}${exp ? ` (expires ${exp})` : ''}${addr ? `, with invoices addressed to ${addr}` : ''}.`, '');
+  if (key) L.push(`One quick security note: please rotate the API key ${key}, since it was shared over email.`, '');
+  if (email || phone) L.push(`We'll send onboarding details to ${email || 'your inbox'}${phone ? ` and can reach you at ${phone}` : ''}.`, '');
+  L.push('Best regards,', 'Customer Success Team');
+  return L.join('\n');
 }
 let view = 'you', replyText = '', typing;
 function paint(partial) {
@@ -290,8 +295,8 @@ $('tog').querySelectorAll('button').forEach(b => b.onclick = () => {
 });
 
 // detectors grid
-const EX = { PRIVATE_KEY: '-----BEGIN PRIVATE KEY-----', API_KEY: 'sk-…, AKIA…, ghp_…, AIza…', JWT: 'eyJhbGciOi…', EMAIL: 'name@company.com', IBAN: 'DE89 3704 0044 …', CARD: '4111 1111 1111 1111', SSN: '123-45-6789', AADHAAR: '2341 2341 2346', PAN: 'ABCPE1234F', IP: '192.168.1.20', PHONE: '+91 98765 43210' };
-$('detGrid').innerHTML = P.DETECTORS.map(d => `<div class="det"><b>${esc(d.label)}</b><code>${esc(EX[d.type] || '')}</code></div>`).join('') +
+const EX = { SECRET: 'password=…, ?token=…, random keys', PIN: 'OTP is 482913', UPI: 'name@okicici', CVV: 'CVV 123', EXPIRY: 'expiry 12/29', IFSC: 'HDFC0001234', WALLET: '0x71C7…976F', GSTIN: '27ABCDE1234F1Z5', DOB: 'DOB: 14/08/1991', ID: 'client ID HLX-00482', PERSON: 'Dr. Ananya Rao, officer Rohan…', ADDRESS: '21 Research Park Road, MA 02139', ORG: 'Helix Biosciences Inc.', PROJECT: 'Project Aurora', PRIVATE_KEY: '-----BEGIN PRIVATE KEY-----', API_KEY: 'sk-…, AKIA…, ghp_…, AIza…', JWT: 'eyJhbGciOi…', EMAIL: 'name@company.com', IBAN: 'DE89 3704 0044 …', CARD: '4111 1111 1111 1111', SSN: '123-45-6789', AADHAAR: '2341 2341 2346', PAN: 'ABCPE1234F', IP: '192.168.1.20', PHONE: '+91 98765 43210' };
+$('detGrid').innerHTML = P.DETECTOR_TYPES.map(d => `<div class="det"><b>${esc(d.label)}</b><code>${esc(EX[d.type] || '')}</code></div>`).join('') +
   `<div class="det" style="border-color:rgba(94,234,212,.4)"><b>Your own terms</b><code>Acme Corp ⇒ [CLIENT_1]</code></div>`;
 </script>
 </body>

@@ -8,9 +8,9 @@
 
 A free Chrome extension that masks emails, phone numbers, card numbers, API keys and client names **the moment you paste** into ChatGPT, Claude or Gemini. Then it shows you the real values in the AI's reply. Everything runs locally.
 
-[**🌐 Website + live demo**](https://aayushm1.github.io/pasteguard/) · [**⬇ Download v0.1.0**](https://github.com/aayushm1/pasteguard/releases/latest/download/pasteguard-extension.zip) · [Privacy policy](PRIVACY.md)
+[**🌐 Website + live demo**](https://aayushm1.github.io/pasteguard/) · [**⬇ Download v0.2.0**](https://github.com/aayushm1/pasteguard/releases/latest/download/pasteguard-extension.zip) · [Privacy policy](PRIVACY.md)
 
-![Version](https://img.shields.io/badge/version-0.1.0-14B8A6)
+![Version](https://img.shields.io/badge/version-0.2.0-14B8A6)
 ![Manifest](https://img.shields.io/badge/Chrome-Manifest%20V3-0B1220)
 ![Privacy](https://img.shields.io/badge/data%20sent%20anywhere-none-12A150)
 ![License](https://img.shields.io/badge/license-MIT-7C8DA8)
@@ -40,22 +40,43 @@ You see:       Hi Priya Shah, we've refunded the duplicate charge on 4111 1111 1
 
 ## What it detects
 
+25 detectors in three layers. Everything runs locally; no AI model is involved.
+
+**1. Patterns with checksums**
+
 | Detector | Example | Validation |
 |---|---|---|
-| Email | `name@company.com` | Pattern |
-| Phone | `+91 98765 43210`, `(415) 555-0132` | 10–15 digits, ignores dates and amounts |
 | Card number | `4111 1111 1111 1111` | **Luhn checksum** |
 | IBAN | `DE89 3704 0044 0532 0130 00` | **Mod-97 checksum** |
 | Aadhaar | `2341 2341 2346` | **Verhoeff checksum** |
-| PAN (India) | `ABCPE1234F` | Format |
+| PAN, GSTIN, IFSC, UPI ID | `ABCPE1234F`, `27ABCDE1234F1Z5`, `HDFC0001234`, `name@okicici` | Format |
 | US SSN | `123-45-6789` | Excludes invalid ranges |
-| API keys | OpenAI, Anthropic, AWS, GitHub, Slack, Google, Stripe, GitLab | Known prefixes |
-| Auth tokens | JWTs (`eyJ…`) | Structure |
-| Private keys | `-----BEGIN … PRIVATE KEY-----` | Block |
-| IP address | `192.168.1.20` | Octet ranges |
-| **Your own terms** | `Acme Corp => CLIENT` | Exact, case-insensitive, whole word |
+| Email, phone, IP address | `+91 98765 43210`, `10.24.8.112` | Digit counts, octet ranges; ignores dates, amounts, versions |
+| API keys | OpenAI, Anthropic, Stripe, AWS, GitHub, GitLab, Slack, Google, Hugging Face, Groq, xAI, SendGrid, Shopify… | Known prefixes |
+| JWTs, private keys, crypto wallets | `eyJ…`, `-----BEGIN PRIVATE KEY-----`, `0x71C7…` | Structure |
+| Unknown secrets | `Q7mZp3Xc9LkT2vBn8RwY4hJd6FsGa1Ue` | **Entropy check**; skips hashes, UUIDs and variable names |
 
-Checksums keep false alarms low: an order number that happens to be 16 digits isn't flagged as a card.
+**2. Context: the words around a value**
+
+| Detector | Catches |
+|---|---|
+| Passwords / secrets | `password: …`, `DB_PASSWORD=…`, `postgres://user:PASS@host`, `?token=…` |
+| Card CVV / expiry | `CVV 123`, `expiry 12/29` |
+| PIN / OTP | `OTP is 482913` |
+| Date of birth | `DOB: 14/08/1991` |
+| ID numbers | `client ID HLX-00482`, `study ID ONC-2026-0117`, `IRB approval number IRB-77421`, `account number …`, `passport …` |
+| Names | `Dr. Ananya Rao`, `finance officer Rohan Deshmukh`, `Name: Rahul Verma`, `Hi Priya`, common first + last names |
+| Addresses | `21 Research Park Road, Cambridge, MA 02139`, `Flat 4B, 12 MG Road, Bengaluru 560001` |
+| Organisations | `Helix Biosciences Inc.`, `… Labs`, `… Technologies` |
+| Project codenames | `Project Aurora`, `Operation …` |
+
+**3. Inference and propagation**
+
+- `priya.shah@northwind.com` → also masks **Priya Shah** and **Northwind** wherever they appear
+- Once `Helix Biosciences Inc.` is found, a later bare **Helix** is masked too
+- **Your own terms:** `Acme Corp => CLIENT` in the popup
+
+Checksums and context keep false alarms low: order numbers, invoice numbers, dates, money, version numbers, commit hashes and UUIDs are left alone. See `dev/test-detectors.js`.
 
 **Works on:** ChatGPT, Claude, Gemini, Microsoft Copilot, Perplexity, DeepSeek, Mistral Le Chat, Poe.
 
@@ -110,7 +131,7 @@ STORE-LISTING.md   Chrome Web Store submission copy
 
 ## Limitations
 
-- Names aren't detected automatically. Add the ones that matter to **Always mask**.
+- Names are detected from context and common first names. Unusual names with no context clue can slip through, so add them to **Always mask**.
 - v0.1 masks pastes, not typed text or file uploads.
 - It's a safety net, not a guarantee. Don't rely on it as your only control for regulated data.
 
@@ -118,6 +139,7 @@ STORE-LISTING.md   Chrome Web Store submission copy
 
 No build step. Edit the files and click reload on `chrome://extensions`.
 
+- `node dev/test-detectors.js` runs the detection regression suite (`-v` prints the masked text)
 - `dev/harness.html` runs `content.js` against a fake chat page with a `chrome.*` shim
 - `dev/popup-harness.html` renders the popup with sample data
 

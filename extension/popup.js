@@ -23,7 +23,7 @@ async function render() {
 
   // detectors
   const disabled = new Set(s.disabled || []);
-  $('dets').innerHTML = P.DETECTORS.map(d => `<label><input type="checkbox" data-t="${d.type}" ${disabled.has(d.type) ? '' : 'checked'}>${esc(d.label)}</label>`).join('');
+  $('dets').innerHTML = P.DETECTOR_TYPES.map(d => `<label><input type="checkbox" data-t="${d.type}" ${disabled.has(d.type) ? '' : 'checked'}>${esc(d.label)}</label>`).join('');
   $('dets').querySelectorAll('input').forEach(cb => cb.onchange = saveDetectors);
 
   // vault
