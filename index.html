@@ -90,6 +90,7 @@ mark.rv{background:rgba(20,184,166,.18);color:var(--ink);border-bottom:1.5px dot
 .inst ol{margin:12px 0 0;padding-left:20px}
 .inst li{margin-bottom:8px}
 .inst code{font:13px var(--mono);background:var(--bg);border:1px solid var(--line);padding:1px 6px;border-radius:6px;color:var(--teal2)}
+.soon.live{color:var(--teal2);border-color:rgba(94,234,212,.4)}
 .soon{display:inline-block;font-size:11.5px;font-weight:700;color:var(--amber);border:1px solid rgba(251,191,36,.35);border-radius:99px;padding:2px 8px;margin-left:8px;vertical-align:middle}
 .price{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .tier{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column}
@@ -115,14 +116,14 @@ footer a{color:var(--teal2)}
 <nav><div class="wrap">
   <a class="brand" href="#"><img src="assets/logo.svg" alt="">PasteGuard</a>
   <div class="links"><a href="#try">Try it</a><a href="#how">How it works</a><a href="#privacy">Privacy</a><a href="#pricing">Pricing</a><a href="https://github.com/aayushm1/pasteguard" target="_blank" rel="noopener">GitHub</a></div>
-  <a class="btn sm" href="#install">Add to Chrome</a>
+  <a class="btn sm" href="https://chromewebstore.google.com/detail/pasteguard-mask-sensitive/mcdijgdegdbpleddkfmkpaoahdcabbkf" target="_blank" rel="noopener">Add to Chrome</a>
 </div></nav>
 
 <header class="hero"><div class="glow"></div><div class="wrap" style="position:relative">
   <span class="badge">🔒 100% local · Open source · Free</span>
   <h1>Paste into AI.<br><em>Keep the secrets.</em></h1>
   <p>PasteGuard masks emails, phone numbers, card numbers, API keys and client names the moment you paste into ChatGPT, Claude or Gemini. Then it shows the real values back to you in the AI's reply.</p>
-  <div class="ctas"><a class="btn" href="#install">Add to Chrome, it's free</a><a class="btn ghost" href="#try">Try it right here ↓</a></div>
+  <div class="ctas"><a class="btn" href="https://chromewebstore.google.com/detail/pasteguard-mask-sensitive/mcdijgdegdbpleddkfmkpaoahdcabbkf" target="_blank" rel="noopener">Add to Chrome, it's free</a><a class="btn ghost" href="#try">Try it right here ↓</a></div>
   <div class="trust"><span>✓ No account</span><span>✓ No servers. Nothing is uploaded.</span><span>✓ Works on ChatGPT, Claude, Gemini, Copilot, Perplexity</span></div>
 </div></header>
 
@@ -186,10 +187,10 @@ footer a{color:var(--teal2)}
 <section id="install"><div class="wrap">
   <div class="sh"><span class="eyebrow">Install</span><h2>Up and running in a minute</h2></div>
   <div class="install">
-    <div class="inst"><h3>Chrome Web Store <span class="soon">In review</span></h3><p style="color:var(--muted);margin:10px 0 0">PasteGuard has been submitted to the Chrome Web Store and is in review. One-click install is coming soon. Until then, use the manual install. It takes about a minute.</p></div>
-    <div class="inst"><h3>Manual install (Chrome, Edge, Brave, Arc)</h3>
+    <div class="inst" style="border-color:rgba(94,234,212,.45)"><h3>Chrome Web Store <span class="soon live">● Live</span></h3><p style="color:var(--muted);margin:10px 0 18px">One click to install. Updates arrive automatically. Works in Chrome, Edge, Brave and Arc.</p><a class="btn" href="https://chromewebstore.google.com/detail/pasteguard-mask-sensitive/mcdijgdegdbpleddkfmkpaoahdcabbkf" target="_blank" rel="noopener">Add to Chrome, it's free</a><p style="color:var(--muted);font-size:13.5px;margin:14px 0 0">After installing, pin the 🛡️ icon and paste something into ChatGPT to see it work.</p></div>
+    <div class="inst"><h3>Manual install <span style="color:var(--muted);font-weight:500;font-size:14px">(for developers)</span></h3>
       <ol>
-        <li><a class="btn sm" href="https://github.com/aayushm1/pasteguard/releases/latest/download/pasteguard-extension.zip">⬇ Download PasteGuard (.zip)</a> and unzip it.</li>
+        <li><a href="https://github.com/aayushm1/pasteguard/releases/latest/download/pasteguard-extension.zip" style="color:var(--teal2)">Download the .zip</a> and unzip it.</li>
         <li>Open <code>chrome://extensions</code> and switch on <b>Developer mode</b> (top right).</li>
         <li>Click <b>Load unpacked</b> and choose the unzipped <code>pasteguard</code> folder.</li>
         <li>Pin the 🛡️ icon. Paste something into ChatGPT to see it work.</li>
@@ -202,7 +203,7 @@ footer a{color:var(--teal2)}
   <div class="sh"><span class="eyebrow">Pricing</span><h2>Free for individuals. Always.</h2></div>
   <div class="price">
     <div class="tier hot"><b style="color:var(--teal2)">Free</b><div class="amt">$0</div><span style="color:var(--muted);font-size:14px">Everything you need on your own</span>
-      <ul><li>25 built-in detectors with context awareness</li><li>Custom "always mask" terms</li><li>Real values restored in replies</li><li>9 AI chat sites</li></ul><a class="btn" href="#install">Install free</a></div>
+      <ul><li>25 built-in detectors with context awareness</li><li>Custom "always mask" terms</li><li>Real values restored in replies</li><li>9 AI chat sites</li></ul><a class="btn" href="https://chromewebstore.google.com/detail/pasteguard-mask-sensitive/mcdijgdegdbpleddkfmkpaoahdcabbkf" target="_blank" rel="noopener">Add to Chrome</a></div>
     <div class="tier"><b style="color:var(--ink)">Pro <span class="soon">Coming soon</span></b><div class="amt">$5<small>/month</small></div><span style="color:var(--muted);font-size:14px">For consultants, lawyers, recruiters</span>
       <ul><li>Mask typed text, not just pastes</li><li>File uploads (PDF, DOCX) scanned before upload</li><li>Saved term lists per client</li><li>Any website, not just AI chats</li></ul><a class="btn ghost" href="https://github.com/aayushm1/pasteguard" target="_blank" rel="noopener">⭐ Star on GitHub to follow</a></div>
     <div class="tier"><b style="color:var(--ink)">Team <span class="soon">Coming soon</span></b><div class="amt">$6<small>/user/month</small></div><span style="color:var(--muted);font-size:14px">For companies adopting AI safely</span>

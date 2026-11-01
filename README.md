@@ -8,9 +8,10 @@
 
 A free Chrome extension that masks emails, phone numbers, card numbers, API keys and client names **the moment you paste** into ChatGPT, Claude or Gemini. Then it shows you the real values in the AI's reply. Everything runs locally.
 
-[**🌐 Website + live demo**](https://aayushm1.github.io/pasteguard/) · [**⬇ Download v0.2.0**](https://github.com/aayushm1/pasteguard/releases/latest/download/pasteguard-extension.zip) · [Privacy policy](PRIVACY.md)
+[**🌐 Website + live demo**](https://aayushm1.github.io/pasteguard/) · [**🧩 Add to Chrome**](https://chromewebstore.google.com/detail/pasteguard-mask-sensitive/mcdijgdegdbpleddkfmkpaoahdcabbkf) · [Privacy policy](PRIVACY.md)
 
-![Version](https://img.shields.io/badge/version-0.2.0-14B8A6)
+[![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Add%20to%20Chrome-14B8A6?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/pasteguard-mask-sensitive/mcdijgdegdbpleddkfmkpaoahdcabbkf)
+![Version](https://img.shields.io/badge/version-0.2.1-14B8A6)
 ![Manifest](https://img.shields.io/badge/Chrome-Manifest%20V3-0B1220)
 ![Privacy](https://img.shields.io/badge/data%20sent%20anywhere-none-12A150)
 ![License](https://img.shields.io/badge/license-MIT-7C8DA8)
@@ -82,9 +83,9 @@ Checksums and context keep false alarms low: order numbers, invoice numbers, dat
 
 ## Install
 
-**Chrome Web Store:** submitted, in review. One-click install is coming soon.
+**[Add PasteGuard to Chrome →](https://chromewebstore.google.com/detail/pasteguard-mask-sensitive/mcdijgdegdbpleddkfmkpaoahdcabbkf)** One click, free, updates automatically. Works in Chrome, Edge, Brave and Arc.
 
-**Manual install (Chrome, Edge, Brave, Arc):**
+**Manual install** (for developers):
 1. Download [`pasteguard-extension.zip`](https://github.com/aayushm1/pasteguard/releases/latest/download/pasteguard-extension.zip) and unzip it.
 2. Open `chrome://extensions` and switch on **Developer mode**.
 3. Click **Load unpacked** and select the unzipped `pasteguard` folder.
@@ -123,7 +124,7 @@ STORE-LISTING.md   Chrome Web Store submission copy
 | **Business model** | Free for individuals → Pro ($5/mo: typed text, file uploads, any site) → Team ($6/user/mo: shared rules, admin dashboard, audit log) |
 
 ### Roadmap
-- [x] Chrome Web Store listing submitted (in review)
+- [x] [Chrome Web Store listing](https://chromewebstore.google.com/detail/pasteguard-mask-sensitive/mcdijgdegdbpleddkfmkpaoahdcabbkf): live
 - [ ] Mask typed text before send, not just pastes
 - [ ] Scan file uploads (PDF, DOCX, CSV) before they reach the AI
 - [ ] Per-site enable/disable
